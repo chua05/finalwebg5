@@ -65,7 +65,7 @@ export default function Dashboard() {
       <Alert variant="destructive">
         <AlertCircle className="h-4 w-4" />
         <AlertTitle>Error</AlertTitle>
-        <AlertDescription>Failed to fetch data from JSONPlaceholder API. Please try again later.</AlertDescription>
+        <AlertDescription>Failed to fetch data from Dynamic Analytics. Please try again later.</AlertDescription>
       </Alert>
     )
   }
@@ -80,7 +80,7 @@ export default function Dashboard() {
     ],
     options: {
       chart: {
-        type: "bar",
+        type: "bar" as const,
         height: 350,
       },
       plotOptions: {
@@ -97,7 +97,7 @@ export default function Dashboard() {
       },
       colors: ["#7c3aed"], // Updated to purple
       theme: {
-        mode: "light",
+        mode: "light" as "light",
       },
     },
   }
@@ -107,13 +107,13 @@ export default function Dashboard() {
     series: [users?.length || 0, posts?.length || 0, comments?.length || 0],
     options: {
       chart: {
-        type: "pie",
+        type: "pie" as const,
         height: 350,
       },
       labels: ["Users", "Posts", "Comments"],
       colors: ["#7c3aed", "#a78bfa", "#c4b5fd"], // Updated to purple shades
       legend: {
-        position: "bottom",
+        position: "bottom" as "bottom",
       },
       responsive: [
         {
@@ -136,7 +136,7 @@ export default function Dashboard() {
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle>Total Users</CardTitle>
+            <CardTitle>Total of Users</CardTitle>
             <CardDescription>Number of users in the system</CardDescription>
           </CardHeader>
           <CardContent>
@@ -149,7 +149,7 @@ export default function Dashboard() {
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle>Total Posts</CardTitle>
+            <CardTitle>Total of Posts</CardTitle>
             <CardDescription>Number of posts created</CardDescription>
           </CardHeader>
           <CardContent>
@@ -162,7 +162,7 @@ export default function Dashboard() {
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle>Total Comments</CardTitle>
+            <CardTitle>Total of Comments</CardTitle>
             <CardDescription>Number of comments made</CardDescription>
           </CardHeader>
           <CardContent>
@@ -178,7 +178,7 @@ export default function Dashboard() {
       <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Data Distribution</CardTitle>
+            <CardTitle>Data Statistics</CardTitle>
             <CardDescription>Comparison of users, posts, and comments</CardDescription>
           </CardHeader>
           <CardContent>

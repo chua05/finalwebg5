@@ -8,7 +8,7 @@ import { ModeToggle } from "./mode-toggle"
 
 const navItems = [
   {
-    name: "Dashboard",
+    name: "Home",
     href: "/",
     icon: Home,
   },
@@ -33,7 +33,7 @@ export default function Navbar() {
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center gap-2 font-semibold">
             <BarChart3 className="h-5 w-5" />
-            <span>JSON Placeholder Dashboard</span>
+            <span>Dynamic Analytics WebPage</span>
           </Link>
           <nav className="hidden md:flex">
             <ul className="flex gap-6">

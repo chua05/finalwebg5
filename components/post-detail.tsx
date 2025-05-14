@@ -81,6 +81,16 @@ export default function PostDetail({ postId }: { postId: string }) {
   const isLoading = postLoading || commentsLoading || userLoading
   const hasError = postError || commentsError || userError
 
+  // Replace fake post text with custom readable text (if needed)
+const displayTitle = post?.title === "quia et suscipit"
+  ? "How to Build a Dashboard with React"
+  : post?.title
+
+const displayBody = post?.body?.includes("suscipit recusandae")
+  ? "This tutorial will guide you step-by-step on building a responsive dashboard using React and modern tools like Tailwind CSS and React Query."
+  : post?.body
+
+
   if (hasError) {
     return (
       <Alert variant="destructive">
@@ -114,7 +124,7 @@ export default function PostDetail({ postId }: { postId: string }) {
             </div>
           ) : (
             <>
-              <CardTitle className="text-2xl">{post?.title}</CardTitle>
+              <CardTitle className="text-2xl">{displayTitle}</CardTitle> {/* Replaced with custom translation */}
               <div className="flex items-center gap-2 mt-2">
                 <User className="h-4 w-4 text-muted-foreground" />
                 <Link href={`/users/${post?.userId}`} className="text-sm text-primary hover:underline">
@@ -133,7 +143,7 @@ export default function PostDetail({ postId }: { postId: string }) {
             </div>
           ) : (
             <div className="space-y-4">
-              <p className="whitespace-pre-line">{post?.body}</p>
+              <p className="whitespace-pre-line">{displayBody}</p> {/* Replaced with custom translation */}
             </div>
           )}
         </CardContent>
@@ -178,7 +188,7 @@ export default function PostDetail({ postId }: { postId: string }) {
                 <div key={comment.id} className="space-y-2">
                   <div className="flex items-start gap-2">
                     <Avatar className="h-8 w-8">
-                      <AvatarFallback>{comment.name[0]}</AvatarFallback>
+                      <AvatarFallback>{comment.name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()}</AvatarFallback>
                     </Avatar>
                     <div>
                       <p className="font-medium">{comment.name}</p>

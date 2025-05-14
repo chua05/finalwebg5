@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import PostDetail from "@/components/post-detail"
 
 export const metadata: Metadata = {
-  title: "Post Detail | JSON Placeholder",
-  description: "Post detail from JSON Placeholder API",
+  title: "Post Detail | Dynamic Analytics",
+  description: "Post detail from JSON Placeholder",
 }
 
 export default function PostPage({ params }: { params: { id: string } }) {

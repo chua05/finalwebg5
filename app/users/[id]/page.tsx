@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import UserProfile from "@/components/user-profile"
 
 export const metadata: Metadata = {
-  title: "User Profile | JSON Placeholder",
-  description: "User profile from JSON Placeholder API",
+  title: "User Profile | Dynamic Analytics",
+  description: "User profile from JSON Placeholder",
 }
 
 export default function UserPage({ params }: { params: { id: string } }) {

@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import PostList from "@/components/post-list"
 
 export const metadata: Metadata = {
-  title: "Posts | JSON Placeholder",
-  description: "List of posts from JSON Placeholder API",
+  title: "Posts | Dynamic Analytics",
+  description: "List of posts from JSON Placeholder",
 }
 
 export default function PostsPage() {

@@ -10,8 +10,8 @@ import { QueryProvider } from "@/components/query-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "JSON Placeholder Dashboard",
-  description: "A dashboard for JSON Placeholder API data",
+  title: "Dynamic Analytics",
+  description: "A dashboard for Analytics data",
     generator: 'v0.dev'
 }
 
@@ -21,9 +21,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} bg-gradient-to-br from-white to-purple-50 dark:from-gray-900 dark:to-purple-950 min-h-screen`}
+      className={`${inter.className} dark bg-gradient-to-br from-white to-purple-50 dark:from-gray-900 dark:to-purple-950 min-h-screen`}
+      style={{ colorScheme: "dark" }}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <QueryProvider>
@@ -33,14 +34,14 @@ export default function RootLayout({
               <footer className="border-t bg-white/50 dark:bg-gray-900/50 py-4 text-center text-sm text-muted-foreground">
                 <div className="container">
                   <p>
-                    JSON Placeholder Dashboard - Data from{" "}
+                    Dynamic Analytics - Data from{" "}
                     <a
                       href="https://jsonplaceholder.typicode.com"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary hover:underline"
                     >
-                      JSONPlaceholder
+                      JSON Placeholder
                     </a>
                   </p>
                 </div>

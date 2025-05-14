@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import UserList from "@/components/user-list"
 
 export const metadata: Metadata = {
-  title: "Users | JSON Placeholder",
-  description: "List of users from JSON Placeholder API",
+  title: "Users | Dynamic Analytics",
+  description: "List of users from JSON Placeholder",
 }
 
 export default function UsersPage() {

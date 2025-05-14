@@ -1,5 +1,5 @@
 "use client"
-
+import { useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
 import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
@@ -41,6 +41,10 @@ async function fetchUsers() {
 
 export default function UserList() {
   const [searchQuery, setSearchQuery] = useState("")
+  const [editingUserId, setEditingUserId] = useState<number | null>(null)
+  const [formData, setFormData] = useState({ name: "", email: "" })
+
+  const queryClient = useQueryClient()
 
   const {
     data: users,
@@ -50,6 +54,27 @@ export default function UserList() {
     queryKey: ["users"],
     queryFn: fetchUsers,
   })
+  const handleEdit = (user: UserType) => {
+    setEditingUserId(user.id)
+    setFormData({ name: user.name, email: user.email })
+  }
+  const handleSave = async (userId: number) => {
+    try {
+      const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
+        method: "PUT",
+        body: JSON.stringify({ ...formData }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      if (!res.ok) throw new Error("Failed to update user")
+      queryClient.invalidateQueries({ queryKey: ["users"] })
+      setEditingUserId(null)
+    } catch (error) {
+      console.error("Error updating user:", error)
+    }
+  }
+
 
   // Filter users based on search query
   const filteredUsers = users?.filter(
@@ -101,7 +126,7 @@ export default function UserList() {
             </Card>
           ))}
         </div>
-      ) : (
+      ) : 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filteredUsers?.map((user) => (
             <Link href={`/users/${user.id}`} key={user.id}>
@@ -129,7 +154,69 @@ export default function UserList() {
             </Link>
           ))}
         </div>
-      )}
+      }
+      
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {filteredUsers?.map((user) => (
+            <Card key={user.id} className="h-full overflow-hidden transition-all hover:border-primary hover:shadow-md">
+              <CardHeader className="pb-2">
+                <div className="flex items-center gap-2">
+                  <User className="h-5 w-5 text-primary" />
+                  {editingUserId === user.id ? (
+                    <input
+                      type="text"
+                      className="border px-2 py-1 text-sm rounded"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    />
+                  ) : (
+                    <CardTitle className="text-lg">{user.name}</CardTitle>
+                  )}
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className="text-sm">
+                  <span className="font-medium">Username:</span> @{user.username}
+                </div>
+                <div className="text-sm">
+                  <span className="font-medium">Email:</span>{" "}
+                  {editingUserId === user.id ? (
+                    <input
+                      type="email"
+                      className="border px-2 py-1 text-sm rounded"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    />
+                  ) : (
+                    user.email
+                  )}
+                </div>
+                <div className="text-sm">
+                  <span className="font-medium">Company:</span> {user.company.name}
+                </div>
+
+                <div className="pt-2">
+                  {editingUserId === user.id ? (
+                    <button
+                      className="text-sm px-3 py-1 bg-green-600 text-white rounded"
+                      onClick={() => handleSave(user.id)}
+                    >
+                      Save
+                    </button>
+                  ) : (
+                    <button
+                      className="text-sm px-3 py-1 bg-blue-600 text-white rounded"
+                      onClick={() => handleEdit(user)}
+                    >
+                      Edit
+                    </button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      
 
       {filteredUsers?.length === 0 && !isLoading && (
         <div className="flex h-40 flex-col items-center justify-center rounded-lg border border-dashed p-8 text-center">
