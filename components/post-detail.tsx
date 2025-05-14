@@ -104,7 +104,7 @@ const displayBody = post?.body?.includes("suscipit recusandae")
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-2">
-        <Button variant="outline" size="sm" asChild>
+        <Button className="outline" asChild>
           <Link href="/posts">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Posts

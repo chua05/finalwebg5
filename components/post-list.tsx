@@ -133,7 +133,7 @@ export default function PostList() {
                     <Link
                       href={`/users/${post.userId}`}
                       className="text-sm text-primary hover:underline"
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e: React.MouseEvent) => e.stopPropagation()}
                     >
                       {getUserName(post.userId)}
                     </Link>
