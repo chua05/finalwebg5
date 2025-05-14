@@ -20,5 +20,12 @@
   "bugs": {
     "url": "https://github.com/chua05/finalwebg5/issues"
   },
-  "homepage": "https://github.com/chua05/finalwebg5#readme"
+  "homepage": "https://github.com/chua05/finalwebg5#readme",
+  "devDependencies": {
+    "@types/react": "^19.1.4"
+  },
+  "dependencies": {
+    "@radix-ui/react-dropdown-menu": "^2.1.14",
+    "lucide-react": "^0.510.0"
+  }
 }
